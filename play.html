@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./output.css">
 </head>
-<body>
+<body class="bg-gray-800">
     <style>
+        
         .container{
             display:grid;
             grid-template-columns:38% 16% 22% 22% ;
@@ -32,22 +34,25 @@
 
         }
     </style>
-   <div class="mainContainer">
-<div class="leftDiv">
+   <div class="mainContainer "  >
+<div class="leftDiv"  class="bg-white flex flex-col align-middle" >
  <h1>Workers List</h1>
- <button >add Worker</button>
+ <button  style=" color: blue; border: solid #070707;  height: 40px; width: 150px;">add Worker</button><br><br>
+ <div style=" color: blue; border: solid #070707;  height: 60px; width: 250px;">
+  <div class="cycle"></div>
+ </div>
 </div>
    <div class="container">
     
     <div class="cell a1" style="display: flex; flex-direction: column; justify-content: center;  align-items: center; gap: 10px;">
-        <div>
-            <button>+</button>
-            <button>+</button>
+        <div class="bg-red">
+            <button class="border-red-100">+</button>
+            <button class="bg-black">+</button>
             <button>+</button>
             
         </div>
           <div>
-           <button>+</button>
+           <button >+</button>
             <button>+</button>
             <button>+</button>
         </div>
@@ -57,7 +62,7 @@
     </div>
     <div class="cell a3" style="display: flex; flex-direction: column; justify-content: center;  align-items: center; gap: 10px;">
         <div>
-            <button>+</button>
+            <button class="bg-blue-500">+</button>
             <button>+</button>
             
             
