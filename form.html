@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./output.css">
+</head>
+<style>
+    input{
+        border: 1px solid;
+        width: 50%;
+        height: 7%;
+        border-radius: 10px;
+       
+    }
+    label{
+        color: gray;
+        font-size: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+</style>
+<body class="bg-[#636363]"  > 
+<form class="hidden" >
+    <button class="bg-orange-600 w-5 h-5 align-middle">x</button>
+
+    <div class="border-2 w-[50%] h-[80vh] text-center ml-5 bg-white overflow-scroll ">
+    <h1 class="text-center font-bold text-4xl text-orange-600">Add Worker</h1> <br>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" required><br> 
+    <label for="name">Age:</label><br>
+    <input type="number" id="age" required><br>
+    <label for="name" id="role">Role:</label><br>
+    <select required >
+        <option >Receptionist</option>
+        <option>IT</option>
+        <option>security guard</option>
+        <option>Manager</option>
+        <option>cleaner</option>
+        <option>Visiter</option>
+    </select><br> 
+    <label for="picture" id="image">Photo (URL)</label><br>
+    <input type="text" required><br>
+    <label for="email">Email</label><br>
+    <input type="email" id="email" required><br>
+    <label>phone Number</label><br>
+    <input type="number" id="phoneNumber" required><br>
+    <label for="Date-enter">Enter Date</label><br>
+    <input type="date" id="enterDate" required><br> 
+    <label for="Date-enter">leave Date</label><br>
+    <input type="date" id="leaveDate" required><br><br> 
+    <div class="buttons flex flex-row  justify-evenly ">
+        <button class="border-2 bg-orange-600 px-10 py-3  text-white"> Add Experience</button>
+        <button type="submit" class="border-2 bg-green-600 px-10 py-3 text-white"  >Submit</button>
+    </div><br><br>
+    <button class="bg-orange-600 w-5 h-5 text-center align-middle ">x</button>
+    <h1 class="text-center font-bold text-4xl text-orange-600">Add Experience</h1><br>
+   <div class="flex flex-row justify-center">
+    <div><label for="name">Title</label><br>
+    <input class="h-9 w-[80%]" type="text" id="title" required><br><br>
+    <label for="name">company</label><br>
+    <input class="h-9 w-[80%]" type="text" id="company" required>
+   </div>
+   <div>
+   <label for="name">start Date</label>
+    <input class="h-9 w-[80%]" type="date" id="exSDate" required> <br><br>
+    <label for="name">end Date</label><br>
+    <input class="h-9 w-[80%]" type="number" id="lvDate" required>
+    </div>
+
+</div>
+
+
+
+</div>
+
+</form>
+  
+
+</body>
