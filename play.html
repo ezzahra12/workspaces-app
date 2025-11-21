@@ -1,61 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./output.css">
-</head>
-<body class="bg-[#636363]"  >
+    <link rel="stylesheet" href="./output.css" />
+  </head>
+  <body class="bg-[#636363]">
     <style>
-        
-        .container{
-            display:grid;
-            grid-template-columns:38% 16% 22% 22% ;
-            grid-template-rows: 220px 200px 220px;
-            height: 92vh;
-            width: 80%;
-            background-image: url(/img/background.png);
-            background-repeat: no-repeat;
-         
-            
-        }
-        .cell{
-          
-            border: 1px solid #070707;
-        }
-        .mainContainer{
-            display: flex;
-           flex-direction: row;
-           gap: 40px;
-        }
-        .leftDiv{
-            border: 1px solid #070707;
-            width: 25%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-        }
-        form{
-            width: 400px;
-        }
-        input{
-            border-radius: 5px;
-        }
-         input{
+      .container {
+        display: grid;
+        grid-template-columns: 38% 16% 22% 22%;
+        grid-template-rows: 220px 200px 220px;
+        height: 92vh;
+        width: 80%;
+        background-image: url(/img/background.png);
+        background-repeat: no-repeat;
+      }
+      .cell {
+        border: 1px solid #070707;
+      }
+      .mainContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+      }
+      .leftDiv {
+        border: 1px solid #070707;
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      form {
+        width: 400px;
+      }
+      input {
+        border-radius: 5px;
+      }
+      input {
         border: 1px solid;
         width: 50%;
         height: 7%;
         border-radius: 10px;
-       
-    }
-     label{
+      }
+      label {
         color: gray;
         font-size: 20px;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    }
-    .overlay{
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      }
+      .overlay {
         display: flex;
         justify-content: center;
         position: fixed;
@@ -63,196 +57,251 @@
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.2);
         align-items: center;
-        
-
-    }
-    .souOverlay{
+      }
+      .souOverlay {
         width: 50%;
         height: 60vh;
         border: solid 1px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
         background-color: rgb(75, 90, 90);
-    }
-    #cancelOverlay{
+      }
+      #cancelOverlay {
         top: 18%;
         right: 24%;
-        
-    }
+      }
+      .workers {
+      }
     </style>
-    
-    <div class="overlay relative ">
-    
-<button type="button" id="cancelOverlay" class=" absolute  bg-orange-600 w-5 h-5  ">x</button>
+
+     <div style="display: none" class="employeOverlay relative">
+        <button
+          type="button"
+          id="closeEmployeModal"
+          class="absolute bg-orange-600 w-5 h-5"
+        >
+          x
+        </button>
+
         <div class="souOverlay text-center">
-            <h1>workersList</h1>
-            <div class="workers ">
+          <!-- Photo -->
+          <div class="flex justify-center">
+            <img id="empPhoto" class="w-24 h-24 rounded-full border" />
+          </div>
 
-            </div>
+          <!-- Name + Role -->
+          <h2 id="empName" class="text-xl font-bold text-center mt-3"></h2>
+          <p id="empRole" class="text-center text-gray-600"></p>
 
+          <!-- Info -->
+          <div class="mt-4 text-sm">
+            <p><strong>Email:</strong> <span id="empEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="empPhone"></span></p>
+            <p><strong>Date Start:</strong> <span id="empDateStart"></span></p>
+            <p><strong>Room:</strong> <span id="empRoom"></span></p>
+          </div>
+
+          <!-- Experience -->
+          <h3 class="mt-4 font-semibold">Work Experience:</h3>
+          <div id="empExperience" class="mt-2 space-y-2"></div>
         </div>
-    </div>
-   
-   <div class="mainContainer "  >
-<div class="leftDiv"  class="bg-white flex flex-col " >
- <h1 class=" text-2xl font-bold text-center ">Workers List</h1>
- <button id="addWorker" style=" color: rgb(42, 42, 46); border: solid #070707;  height: 40px; width: 150px;  ">add Worker</button><br><br>
- <div class="workersList flex flex-col">
- 
- 
- </div>
-</div>
+      </div>
 
-<form class="absolute left-[40%] hidden w-[50vw]">
-    <button type="button" id="closebtn" class="bg-orange-600 w-5 h-5 align-middle">x</button>
-
-    <div class="border-2 w-[50%] h-[80vh] text-center ml-5 bg-white overflow-scroll ">
-    <h1 class="text-center font-bold text-4xl text-orange-600">Add Worker</h1> <br>
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" required><br> 
-    <label for="name">Age:</label><br>
-    <input type="number" id="age" required><br>
-    <label for="name" id="role">Role:</label><br>
-    <select required >
-        <option >Receptionist</option>
-        <option>IT</option>
-        <option>security guard</option>
-        <option>Manager</option>
-        <option>cleaner</option>
-        <option>Visiter</option>
-    </select><br> 
-    <label for="picture" id="image">Photo (URL)</label><br>
-    <input type="text" required><br>
-    <label for="email">Email</label><br>
-    <input type="email" id="email" required><br>
-    <label>phone Number</label><br>
-    <input type="number" id="phoneNumber" required><br>
-    <label for="Date-enter">Enter Date</label><br>
-    <input type="date" id="enterDate" required><br> 
-    <label for="Date-enter">leave Date</label><br>
-    <input type="date" id="leaveDate" required><br><br> 
-    <div class="buttons flex flex-row  justify-evenly ">
-        <button type="button" class="border-2 bg-orange-600 px-10 py-3  text-white"> Add Experience</button>
-        <button type="submit" class="border-2 bg-green-600 px-10 py-3 text-white"  >Submit</button>
-    </div><br><br>
-    <button type="button" class="cancelExp  bg-orange-600 w-5 h-5 text-center align-middle ">x</button>
-    <h1  class="text-center font-bold text-4xl text-orange-600">Add Experience</h1><br>
-   <div class="exp flex flex-row justify-center">
-    <div><label for="name">Title</label><br>
-    <input class="h-9 w-[80%]" type="text" id="title" required><br><br>
-    <label for="name">company</label><br>
-    <input class="h-9 w-[80%]" type="text" id="company" required>
-   </div>
-   <div>
-   <label for="name">start Date</label>
-    <input class="h-9 w-[80%]" type="date" id="exSDate" required> <br><br>
-    <label for="name">end Date</label><br>
-    <input class="h-9 w-[80%]" type="number" id="lvDate" required>
+    <div style="display: none" class="overlay relative">
+      <button
+        type="button"
+        id="cancelOverlay"
+        class="absolute bg-orange-600 w-5 h-5"
+      >
+        x
+      </button>
+      <div class="souOverlay text-center">
+        <h1 class="text-white">available workers</h1>
+        <div class="workers"></div>
+      </div>
     </div>
 
-</div>
+    <div class="mainContainer">
+      <div class="leftDiv" class="bg-white flex flex-col overflow-scroll">
+        <h1 class="text-2xl font-bold text-center">Workers List</h1>
+        <button
+          id="addWorker"
+          style="
+            color: rgb(42, 42, 46);
+            border: solid #070707;
+            height: 40px;
+            width: 150px;
+          "
+        >
+          add Worker</button
+        ><br /><br />
+        <div class="workersList flex flex-col gap-2"></div>
+      </div>
 
+      <form class="absolute left-[40%] hidden w-[50vw]">
+        <button
+          type="button"
+          id="closebtn"
+          class="bg-orange-600 w-5 h-5 align-middle"
+        >
+          x
+        </button>
 
+        <div
+          class="border-2 w-[50%] h-[80vh] text-center ml-5 bg-white overflow-scroll"
+        >
+          <h1 class="text-center font-bold text-4xl text-orange-600">
+            Add Worker
+          </h1>
+          <br />
+          <label for="name">Name:</label><br />
+          <input type="text" id="name" required /><br />
+          <label for="name">Age:</label><br />
+          <input type="number" id="age" required /><br />
+          <label for="name">Role:</label><br />
+          <select id="role" required>
+            <option value="receptionist">Receptionist</option>
+            <option value="it">IT</option>
+            <option value="security">security guard</option>
+            <option value="manager">Manager</option>
+            <option value="cleaner">cleaner</option>
+            <option value="visiter">Visiter</option></select
+          ><br />
+          <label for="picture" id="image">Photo (URL)</label><br />
+          <input type="text" required /><br />
+          <label for="email">Email</label><br />
+          <input type="email" id="email" required /><br />
+          <label>phone Number</label><br />
+          <input type="number" id="phoneNumber" required /><br />
+          <label for="Date-enter">Enter Date</label><br />
+          <input type="date" id="enterDate" required /><br />
 
-</div>
+          <br /><br />
 
-</form>
+          <h1 class="text-center font-bold text-4xl text-orange-600">
+            Add Experience
+          </h1>
+          <br />
 
+          <div id="experiences"></div>
 
-
-
-<!-- <div class=" fixed  bg-white text-center top-0 w-[50vw]">
-  <h1>workersList</h1> 
-
-
-</div>
- -->
-
-
-
-
-
-
-
-
-
-
-   <div class="container">
-    
-    <div class="cell a1" style="display: flex; flex-direction: column; justify-content: center;  align-items: center; gap: 10px;">
-         <div>
-            <button class="addToZ1 bg-[#636363] w-8 h-9">+</button>
-            
-            
-            
+          <div class="buttons flex flex-row justify-evenly">
+            <button
+              type="button"
+              id="addExperience"
+              class="border-2 bg-orange-600 px-10 py-3 text-white"
+            >
+              Add Experience
+            </button>
+            <button
+              type="submit"
+              class="border-2 bg-green-600 px-10 py-3 text-white"
+            >
+              Submit
+            </button>
+          </div>
         </div>
-          
-    </div>
-    <div class="cell a2">
-        
-    </div>
-    <div class="cell a3"  style="display: flex; flex-direction: column; justify-content: center;  align-items: center; gap: 10px;">
-         <div>
-            <button class="addToZ2 bg-[#636363] w-8 h-9">+</button>
-            
-            
-            
+      </form>
+
+      <div class="container">
+        <div
+          class="conference"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <button data-room="conference" class="addToZ1 bg-[#636363]">
+              + conference
+            </button>
+          </div>
         </div>
-          
-    </div>
-    <div class="addToZ3  cell a4" style="display: flex; flex-direction: column; justify-content: center;  align-items: center; gap: 10px;">
-         <div>
-            <button class="bg-[#636363] w-8 h-9">+</button>
-            
-            
-            
+        <div class="cell a2"></div>
+        <div
+          class="server"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <button data-room="server" class="addToZ2 bg-[#636363]">
+              +server
+            </button>
+          </div>
         </div>
-          
-    </div>
-    
-
-    <div class="addToZ4 cell b1" style=" display: flex; justify-content: center; align-items: end;">
-        <div>
-            <button class="bg-[#636363] w-8 h-9">+</button>
-           
-            
+        <div
+          class="addToZ3 security"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <button data-room="security" class="bg-[#636363]">+security</button>
+          </div>
         </div>
-          
-    </div>
-    <div class="cell b2"></div>
-    <div class="cell b3"></div>
-    <div class="cell b4"></div>
- 
 
-
-    <div class="cell c1">
-       
-    </div>
-    <div class="cell c2">
-       
-    </div>
-    <div class="addToZ5 cell c3"  style="display: flex; flex-direction: column; justify-content: center;  align-items: center; gap: 10px;">
-         <div>
-            <button class="bg-[#636363] w-8 h-9">+</button>
-            
-            
-            
+        <div
+          class="addToZ4 reception"
+          style="display: flex; justify-content: center; align-items: end"
+        >
+          <div>
+            <button data-room="reception" class="bg-[#636363]">
+              +reception
+            </button>
+          </div>
         </div>
-          
-    </div>
-    <div class="addToZ6   cell c4"  style="display: flex; flex-direction: column; justify-content: center;  align-items: center; gap: 10px;">
-         <div>
-            <button class="bg-[#636363] w-8 h-9">+</button>
-        
+        <div class="cell b2"></div>
+        <div class="cell b3"></div>
+        <div class="cell b4"></div>
+
+        <div class="cell c1"></div>
+        <div class="cell c2"></div>
+        <div
+          class="stuff"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <button data-room="stuff" class="bg-[#636363]">+stuff</button>
+          </div>
         </div>
-          
+        <div
+          class="addToZ6 archives"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <button data-room="archives" class="bg-[#636363]">+archives</button>
+          </div>
+        </div>
+      </div>
+
+     
+
     </div>
-  
 
-    
-   </div>
-   </div>
-
-
-   <script src="play.js"></script>
-</body>
+    <script src="play.js"></script>
+  </body>
 </html>
