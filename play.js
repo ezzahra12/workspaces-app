@@ -3,10 +3,13 @@
 let workerList = document.querySelector(".workersList");
 let cancelOverflay = document.getElementById("cancelOverflay");
 let Overlay = document.querySelector(".overlay");
+const closeEmployeModal = document.getElementById("closeEmployeModal");
+const employeOverlay = document.getElementById("employeOverlay");
 let workers = document.querySelector(".workers");
 let form = document.querySelector("form");
-let closeBtn = document.getElementById("closebtn");
+let addWorkerCloseBtn = document.getElementById("addWorkerCloseBtn");
 let newWorker = document.getElementById("addWorker");
+let cancelOverlay = document.getElementById("cancelOverlay");
 let cancelExp = document.querySelector(".cancelExp");
 let Exp = document.querySelector(".exp");
 let addToZ1 = document.querySelector(".addToZ1");
@@ -14,6 +17,137 @@ const container = document.querySelector(".container");
 
 const experiences = document.getElementById("experiences");
 const addExperience = document.getElementById("addExperience");
+
+const employes = [
+  {
+    id: 1732309385123,
+    name: "Amine L.",
+    role: "manager",
+    age: 22,
+    photo: "https://randomuser.me/api/portraits/men/32.jpg",
+    email: "manager@example.com",
+    phone: "0612345678",
+    dateStart: "2023-01-10",
+    workExperience: [
+      {
+        startDate: "2022-01-01",
+        endDate: "2022-12-31",
+        title: "IT Technician",
+        company: "Company A",
+      },
+      {
+        startDate: "2021-01-01",
+        endDate: "2021-12-31",
+        title: "IT Technician",
+        company: "Company A",
+      },
+    ],
+    room: "conference",
+  },
+  {
+    id: 1732309385124,
+    name: "Sara B.",
+    role: "receptionist",
+    age: 22,
+    photo: "https://randomuser.me/api/portraits/women/44.jpg",
+    email: "sara.reception@example.com",
+    phone: "0623456789",
+    dateStart: "2023-02-01",
+    workExperience: [
+      {
+        startDate: "2022-01-01",
+        endDate: "2022-12-31",
+        title: "IT Technician",
+        company: "Company A",
+      },
+      {
+        startDate: "2021-01-01",
+        endDate: "2021-12-31",
+        title: "IT Technician",
+        company: "Company A",
+      },
+    ],
+    room: "reception",
+  },
+  {
+    id: 1732309385125,
+    name: "Youssef K.",
+    role: "ittechnician",
+    age: 22,
+    photo: "https://randomuser.me/api/portraits/men/55.jpg",
+    email: "youssef.it@example.com",
+    phone: "0634567890",
+    dateStart: "2023-03-15",
+    room: null,
+    workExperience: [
+      {
+        startDate: "2022-01-01",
+        endDate: "2022-12-31",
+        title: "IT Technician",
+        company: "Company A",
+      },
+      {
+        startDate: "2021-01-01",
+        endDate: "2021-12-31",
+        title: "IT Technician",
+        company: "Company A",
+      },
+    ],
+  },
+];
+
+let roomWithEachEmployees = {
+  conference: ["cleaner", "visiter", "manager"],
+  reception: ["receptionist", "cleaner", "manager"],
+  server: ["it", "cleaner", "manager"],
+  security: ["security", "cleaner"],
+  stuff: ["stuff", "cleaner", "visiter", "manager"],
+  archives: ["visiter", "manager"],
+};
+
+displayEmployees(employes);
+
+container.addEventListener("click", (e) => {
+  const room = e.target.dataset.room;
+
+  if (room) {
+    Overlay.style.display = "flex";
+
+    let filteredEmployes = employes.filter((emp) => {
+      return (
+        emp.room == null || (roomWithEachEmployees[room].includes(emp.role) && emp.room !== room)
+      );
+    });
+
+    workers.innerHTML = "";
+
+    filteredEmployes.forEach((emp) => {
+      let div = document.createElement("div");
+      div.className = "chooseEmploye";
+      div.dataset.id = emp.id;
+
+      div.innerHTML = `
+      <div class="bg-white flex flex-row"
+           style="gap:30px; border: solid #c8630b; border-radius: 10px; height: 57px; width: 250px;">
+        <img src="${emp.photo}" width="34">
+        <div class="flex flex-col justify-evenly">
+          <p class="font-bold">${emp.name}</p>
+          <p>${emp.role}</p>
+        </div>
+      </div>
+    `;
+    workers.appendChild(div);
+    div.addEventListener("click", (e) => {
+      const id = e.target.closest(".chooseEmploye").dataset.id;
+      const emp = employes.find((emp) => emp.id == id);
+      emp.room = room;
+      Overlay.style.display = "none";
+      displayEmployees(employes);
+    })
+
+    });
+  }
+});
 
 addExperience.addEventListener("click", (e) => {
   const div = document.createElement("div");
@@ -45,170 +179,92 @@ addExperience.addEventListener("click", (e) => {
               <input class="end-date h-9 w-[80%]" type="date" id="lvDate" required />
             </div>
           `;
-          experiences.append(div);
+  experiences.append(div);
 
   div.querySelector(".cancelExp").addEventListener("click", (e) => {
     e.target.closest(".exp").remove();
   });
 });
 
-let experiencesArr = [];
-
-const employes = [
-  {
-    name: "Amine L.",
-    role: "security",
-    age: 22,
-    photo: "https://randomuser.me/api/portraits/men/32.jpg",
-    email: "amine.security@example.com",
-    phone: "0612345678",
-    dateStart: "2023-01-10",
-    workExperience: [
-      {
-        startDate: "2022-01-01",
-        endDate: "2022-12-31",
-        title: "IT Technician",
-        company: "Company A",
-      },
-      {
-        startDate: "2021-01-01",
-        endDate: "2021-12-31",
-        title: "IT Technician",
-        company: "Company A",
-      },
-    ],
-    room: null,
-  },
-  {
-    name: "Sara B.",
-    role: "receptionist",
-    age: 22,
-    photo: "https://randomuser.me/api/portraits/women/44.jpg",
-    email: "sara.reception@example.com",
-    phone: "0623456789",
-    dateStart: "2023-02-01",
-    workExperience: [
-      {
-        startDate: "2022-01-01",
-        endDate: "2022-12-31",
-        title: "IT Technician",
-        company: "Company A",
-      },
-      {
-        startDate: "2021-01-01",
-        endDate: "2021-12-31",
-        title: "IT Technician",
-        company: "Company A",
-      },
-    ],
-    room: "reception",
-  },
-  {
-    name: "Youssef K.",
-    role: "ittechnician",
-    age: 22,
-    photo: "https://randomuser.me/api/portraits/men/55.jpg",
-    email: "youssef.it@example.com",
-    phone: "0634567890",
-    dateStart: "2023-03-15",
-    room: "server",
-    workExperience: [
-      {
-        startDate: "2022-01-01",
-        endDate: "2022-12-31",
-        title: "IT Technician",
-        company: "Company A",
-      },
-      {
-        startDate: "2021-01-01",
-        endDate: "2021-12-31",
-        title: "IT Technician",
-        company: "Company A",
-      },
-    ],
-  },
-];
-
-let roomWithEachEmployees = {
-  conference: ["cleaner", "visiter", "manager"],
-  reception: ["receptionist", "cleaner", "manager"],
-  server: ["it", "cleaner", "manager"],
-  security: ["security", "cleaner"],
-  stuff: ["stuff", "cleaner", "visiter", "manager"],
-  archives: ["visiter", "manager"],
-};
-
-// console.log(workerList);
-
-container.addEventListener("click", (e) => {
-  const room = e.target.dataset.room;
-
-  if (room) {
-    Overlay.style.display = "flex";
-
-    // FILTER EMPLOYEES
-    let filteredEmployes = employes.filter((emp) => {
-      return emp.room == null && roomWithEachEmployees[room].includes(emp.role);
-    });
-
-    // CLEAR THE LIST ONLY ONCE
-    workers.innerHTML = "";
-
-    // DISPLAY EMPLOYEES
-    filteredEmployes.forEach((emp) => {
-      let div = document.createElement("div");
-      div.className = "employe";
-
-      div.innerHTML = `
-        <div class="bg-white flex flex-row"
-             style="gap:30px; border: solid #c8630b; border-radius: 10px; height: 57px; width: 250px;">
-          <img src="${emp.photo}" width="34">
-          <div class="flex flex-col justify-evenly">
-            <h1 class="font-bold">${emp.name}</h1>
-            <h2>${emp.role}</h2>
-          </div>
-          <div class="flex flex-col">
-            <button class="font-bold">x</button>
-            <button style="border:1px solid;width:40px;height:30px;border-color:#c8630b;">edit</button>
-          </div>
-        </div>
-      `;
-
-      workers.appendChild(div);
-    });
-  }
-});
-
-function display(list=employes) {
+function displayEmployees() {
   workerList.innerHTML = "";
+  document.querySelectorAll(".room").forEach(room => room.innerHTML = "");
 
-  list.forEach((e) => {
+  employes.forEach((em) => {
     let div = document.createElement("div");
     div.className = "employe";
-    div.innerHTML = `
-    <div class="bg-white flex flex-row  " style=" gap:30px; border: solid #c8630b; border-radius: 10px; height: 57px; width: 250px;">
-        <img  src="${e.photo}"   alt=""  width="34px">
-        <div class="flex flex-col justify-evenly">
-          <h1 class="font-bold" >${e.name}</h1>
-          <h2>${e.role}</h2>
-          </div>
-          <div class="flex flex-col">
-        <button  class="font-bold">x</button>
-        <button class="show-more" style=" border: 1px solid;width: 40px; height: 30px; border-color: #c8630b ;">show</button>
+    div.dataset.id = em.id;
+
+
+    if (em.room == null) {
+      div.innerHTML = `
+      <div class="bg-white flex flex-row  " style=" gap:30px; border: solid #c8630b; border-radius: 10px; width: fit-content;">
+          <img  src="${em.photo}"   alt=""  width="34px">
+          <div class="flex flex-col justify-evenly">
+            <p class="m-0 text-sm font-bold" >${em.name}</p>
+            <p class="m-0 text-sm">${em.role}</p>
+            </div>
+            <div class="flex flex-col">
+            <button class="show-more" style=" border: 1px solid;width: 40px; height: 30px; border-color: #c8630b ;">show</button>
+            </div>
+            </div>
+            `;
+      workerList.appendChild(div);
+    } else {
+      div.innerHTML = `
+      <div class="bg-white flex flex-row  " style=" gap:10px; border: solid #c8630b; border-radius: 10px; width: fit-content; ">
+          <img  src="${em.photo}"   alt=""  width="34px">
+          <div class="flex flex-col justify-evenly">
+            <p class="m-0 text-sm font-bold" >${em.name}</p>
+            <p class="m-0 text-sm">${em.role}</p>
+            <div class="flex gap-1">
+          <button class="show-more" style=" border: 1px solid; border-color: #c8630b ;">show</button>
+            <button style="border: 1px solid; border-color: #c8630b ;"  class="leave-room font-bold">x</button>
+</div>
+            </div>
       </div>
-    </div>
-    `;
+      `;
+      div.querySelector(".leave-room").addEventListener("click", (e) => {
+        em.room = null;
+        displayEmployees();
+      });
+      document.querySelector(`.${em.room} .room`).appendChild(div);
 
-    workerList.appendChild(div);
+    }
 
-    div.querySelector(".show-more").addEventListener("click", (e)=>{
-      alert("test");
+
+    div.querySelector(".show-more").addEventListener("click", (ev) => {
+      showEmployeeModal(em);
     });
-
-
   });
 }
-display()
+
+function showEmployeeModal(emp) {
+  employeOverlay.style.display = "flex";
+
+  document.getElementById("empPhoto").src = emp.photo;
+  document.getElementById("empName").textContent = emp.name;
+  document.getElementById("empRole").textContent = emp.role;
+  document.getElementById("empEmail").textContent = emp.email;
+  document.getElementById("empPhone").textContent = emp.phone;
+  document.getElementById("empDateStart").textContent = emp.dateStart;
+  document.getElementById("empRoom").textContent = emp.room;
+
+  const expDiv = document.getElementById("empExperience");
+  expDiv.innerHTML = "";
+
+  emp.workExperience.forEach((exp) => {
+    const item = document.createElement("div");
+    item.className = "p-2 bg-white-100 rounded";
+
+    item.innerHTML = `
+      <p><strong>${exp.title}</strong> - ${exp.company}</p>
+      <p class="text-xs text-white-600">${exp.startDate} → ${exp.endDate}</p>
+    `;
+
+    expDiv.appendChild(item);
+  });
+}
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -222,18 +278,16 @@ form.addEventListener("submit", (e) => {
 
   const experiencesElements = document.querySelectorAll(".exp");
   const experiences = [];
-  
-  experiencesElements.forEach((e)=> {
+
+  experiencesElements.forEach((e) => {
     const exp = {
       title: e.querySelector(".title").value,
-      company: e.querySelector(".company").value,  
+      company: e.querySelector(".company").value,
       startDate: e.querySelector(".start-date").value,
       endDate: e.querySelector(".end-date").value,
-    }
+    };
     experiences.push(exp);
-  })
-
-  // experiences: experiencesArr;
+  });
 
   // if(name.length<3){
   //     alert("name must be at least 3C");
@@ -267,6 +321,7 @@ form.addEventListener("submit", (e) => {
   //  alert("form is valid !")
 
   employes.push({
+    id: new Date().getTime(),
     room: null,
     name,
     age,
@@ -275,25 +330,30 @@ form.addEventListener("submit", (e) => {
     email,
     phone,
     dateStart,
-    experiences
+    experiences,
   });
-  //  console.log(employes)
 
-  display(employes);
+  displayEmployees(employes);
 });
 
 newWorker.addEventListener("click", () => {
   form.classList.remove("hidden");
 });
-closeBtn.addEventListener("click", () => {
+
+addWorkerCloseBtn.addEventListener("click", () => {
   form.classList.add("hidden");
+});
+
+closeEmployeModal.addEventListener("click", () => {
+  employeOverlay.style.display = "none";
 });
 
 cancelOverlay.addEventListener("click", () => {
   Overlay.style.display = "none";
 });
-addToZ1.addEventListener("click", () => {
-  Overlay.style.display = "flex";
+
+// addToZ1.addEventListener("click", () => {
+  // Overlay.style.display = "flex";
 
   // workerList.forEach((worker) => {
   //   let div=document.createElement("div");
@@ -314,4 +374,4 @@ addToZ1.addEventListener("click", () => {
   //     div.innerHTML=html
   // workers.appendChild(div)
   // });
-});
+// });
