@@ -8,6 +8,9 @@
   </head>
   <body class="bg-[#636363]">
     <style>
+      p {
+        margin: 0;
+      }
       .container {
         display: grid;
         grid-template-columns: 38% 16% 22% 22%;
@@ -70,11 +73,40 @@
         top: 18%;
         right: 24%;
       }
+      .employeOverlay {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.2);
+        align-items: center;
+      }
+      .employeOverlay .souOverlay {
+        width: 50%;
+        height: 60vh;
+        border: solid 1px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        background-color: rgb(75, 90, 90);
+      }
+      .employeOverlay #closeEmployeModal {
+        top: 18%;
+        right: 24%;
+      }
+      .room {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
       .workers {
       }
     </style>
 
-     <div style="display: none" class="employeOverlay relative">
+     <div id="employeOverlay" style="display: none" class="z-20 employeOverlay relative">
         <button
           type="button"
           id="closeEmployeModal"
@@ -103,11 +135,13 @@
 
           <!-- Experience -->
           <h3 class="mt-4 font-semibold">Work Experience:</h3>
-          <div id="empExperience" class="mt-2 space-y-2"></div>
+          <div id="empExperience" class="mt-2 space-y-2">
+
+          </div>
         </div>
       </div>
 
-    <div style="display: none" class="overlay relative">
+    <div style="display: none" class="z-20 overlay relative">
       <button
         type="button"
         id="cancelOverlay"
@@ -138,10 +172,10 @@
         <div class="workersList flex flex-col gap-2"></div>
       </div>
 
-      <form class="absolute left-[40%] hidden w-[50vw]">
+      <form class="z-20 absolute left-[40%] hidden w-[50vw]">
         <button
           type="button"
-          id="closebtn"
+          id="addWorkerCloseBtn"
           class="bg-orange-600 w-5 h-5 align-middle"
         >
           x
@@ -205,24 +239,17 @@
 
       <div class="container">
         <div
-          class="conference"
-          style="
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-          "
+          class="conference relative"
         >
-          <div>
-            <button data-room="conference" class="addToZ1 bg-[#636363]">
+            <button data-room="conference" class="w-[50%] absolute top-0 left-0 addToZ1 bg-[#636363]">
               + conference
             </button>
+            <div class="room"></div>
           </div>
-        </div>
+          
         <div class="cell a2"></div>
         <div
-          class="server"
+          class="server relative"
           style="
             display: flex;
             flex-direction: column;
@@ -231,36 +258,37 @@
             gap: 10px;
           "
         >
-          <div>
-            <button data-room="server" class="addToZ2 bg-[#636363]">
+            <button data-room="server" class="w-[50%] absolute top-0 left-0 addToZ2 bg-[#636363]">
               +server
             </button>
-          </div>
+            <div class="room"></div>
+
         </div>
-        <div
-          class="addToZ3 security"
-          style="
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-          "
-        >
-          <div>
-            <button data-room="security" class="bg-[#636363]">+security</button>
-          </div>
-        </div>
+       <div
+  class="security relative"
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  "
+>
+    <button data-room="security" class="w-[50%] absolute top-0 left-0 bg-[#636363]">
+      +security
+    </button>
+    <div class="room"></div>
+</div>
 
         <div
-          class="addToZ4 reception"
+          class="addToZ4 reception relative"
           style="display: flex; justify-content: center; align-items: end"
         >
-          <div>
-            <button data-room="reception" class="bg-[#636363]">
+            <button data-room="reception" class="w-[50%] absolute top-0 left-0  bg-[#636363]">
               +reception
             </button>
-          </div>
+            <div class="room"></div>
+
         </div>
         <div class="cell b2"></div>
         <div class="cell b3"></div>
@@ -269,7 +297,7 @@
         <div class="cell c1"></div>
         <div class="cell c2"></div>
         <div
-          class="stuff"
+          class="stuff relative"
           style="
             display: flex;
             flex-direction: column;
@@ -278,12 +306,12 @@
             gap: 10px;
           "
         >
-          <div>
-            <button data-room="stuff" class="bg-[#636363]">+stuff</button>
-          </div>
+            <button data-room="stuff" class="w-[50%] absolute top-0 left-0  bg-[#636363]">+stuff</button>
+            <div class="room"></div>
+
         </div>
         <div
-          class="addToZ6 archives"
+          class="addToZ6 archives relative"
           style="
             display: flex;
             flex-direction: column;
@@ -292,9 +320,9 @@
             gap: 10px;
           "
         >
-          <div>
-            <button data-room="archives" class="bg-[#636363]">+archives</button>
-          </div>
+            <button data-room="archives" class="w-[50%] absolute top-0 left-0  bg-[#636363]">+archives</button>
+            <div class="room"></div>
+
         </div>
       </div>
 
