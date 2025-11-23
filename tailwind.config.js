@@ -1,12 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/*.{html,js}"],
+  content: ["./index.html", "./play.js"],
   theme: {
-    extend: {
-      backgroundImage:{
-        'plan':"url{'./images/plan.jpg')",
-      }
-    },
+    extend: {},
   },
   plugins: [],
 }

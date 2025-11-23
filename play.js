@@ -7,23 +7,17 @@ const closeEmployeModal = document.getElementById("closeEmployeModal");
 const employeOverlay = document.getElementById("employeOverlay");
 let workers = document.querySelector(".workers");
 let form = document.querySelector("form");
+let preview = document.getElementById("preview");
+let image = document.getElementById("image");
 let addWorkerCloseBtn = document.getElementById("addWorkerCloseBtn");
 let newWorker = document.getElementById("addWorker");
 let cancelOverlay = document.getElementById("cancelOverlay");
 let cancelExp = document.querySelector(".cancelExp");
 let Exp = document.querySelector(".exp");
-let addToZ1 = document.querySelector(".addToZ1");
-const container = document.querySelector(".container");
+const container = document.querySelector(".room-container");
 
 const experiences = document.getElementById("experiences");
 const addExperience = document.getElementById("addExperience");
-cont romms=document.querySelectorAll(".room");
-
-romms.forEach((room)=>{
-  if (room.innerHTML.trim()==""){
-    room.style.background="red";
-  }
-})
 
 const employes = [
   {
@@ -273,6 +267,10 @@ function showEmployeeModal(emp) {
   });
 }
 
+image.addEventListener("input", e => {
+  value = e.target.value;
+  preview.src = value;
+})
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -295,6 +293,7 @@ form.addEventListener("submit", (e) => {
       endDate: e.querySelector(".end-date").value,
     };
     experiences.push(exp);
+
   });
 
   // if(name.length<3){
@@ -342,6 +341,8 @@ form.addEventListener("submit", (e) => {
   });
 
   displayEmployees(employes);
+  form.reset();
+  form.classList.add("hidden")
 });
 
 newWorker.addEventListener("click", () => {
@@ -359,27 +360,3 @@ closeEmployeModal.addEventListener("click", () => {
 cancelOverlay.addEventListener("click", () => {
   Overlay.style.display = "none";
 });
-
-// addToZ1.addEventListener("click", () => {
-  // Overlay.style.display = "flex";
-
-  // workerList.forEach((worker) => {
-  //   let div=document.createElement("div");
-  //   const html=
-  //   `
-  //      <div class="bg-white flex flex-row  " style=" gap:30px; border: solid #c8630b; border-radius: 10px; height: 57px; width: 250px;">
-  //         <img  src="${worker.photo}"   alt=""  width="34px">
-  //         <div class="flex flex-col justify-evenly">
-  //           <h1 class="font-bold" >${worker.name}</h1>
-  //           <h2>${worker.role}</h2>
-  //           </div>
-  //           <div class="flex flex-col">
-  //     <button  class="font-bold">x</button>
-  //     <button style=" border: 1px solid;width: 40px; height: 30px; border-color: #c8630b ;">edit</button>
-  //   </div>
-  //     </div>
-  //     `
-  //     div.innerHTML=html
-  // workers.appendChild(div)
-  // });
-// });
