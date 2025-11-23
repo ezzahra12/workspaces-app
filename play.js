@@ -17,6 +17,13 @@ const container = document.querySelector(".container");
 
 const experiences = document.getElementById("experiences");
 const addExperience = document.getElementById("addExperience");
+cont romms=document.querySelectorAll(".room");
+
+romms.forEach((room)=>{
+  if (room.innerHTML.trim()==""){
+    room.style.background="red";
+  }
+})
 
 const employes = [
   {
@@ -265,6 +272,7 @@ function showEmployeeModal(emp) {
     expDiv.appendChild(item);
   });
 }
+
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
